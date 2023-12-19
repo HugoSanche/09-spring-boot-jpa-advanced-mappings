@@ -14,6 +14,8 @@ public class InstructorDetail {
     private String youtubeChannel;
     @Column(name="hobby")
     private String hobby;
+
+
     public InstructorDetail() {
 
     }

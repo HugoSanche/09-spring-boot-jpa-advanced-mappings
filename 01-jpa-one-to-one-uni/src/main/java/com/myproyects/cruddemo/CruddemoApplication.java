@@ -17,9 +17,9 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDao appDao){
 		return runner->{
-			//createInstructor(appDao);
+			createInstructor(appDao);
 			//findTheInstructor(appDao);
-			deleteInstructor(appDao);
+			//deleteInstructor(appDao);
 		};
 	}
 
@@ -40,11 +40,11 @@ public class CruddemoApplication {
 
 	private void createInstructor(AppDao appDao) {
 
-	//	Instructor instructor=new Instructor("Hugo", "Baltazar","hugoclaren@hotmail.com");
-	//	InstructorDetail instructorDetail=new InstructorDetail("https://www.youtube.com/channel/UCV0GXJgNgjimkXJIGT-ZB1Q","Travel");
+		Instructor instructor=new Instructor("Hugo", "Baltazar","hugoclaren@hotmail.com");
+		InstructorDetail instructorDetail=new InstructorDetail("https://www.youtube.com/channel/UCV0GXJgNgjimkXJIGT-ZB1Q","Travel");
 
-		Instructor instructor=new Instructor("Eduardo", "Perez","Eperez@hotmail.com");
-		InstructorDetail instructorDetail=new InstructorDetail("https://www.youtube.com/channel/UCV0GXJgNg","GYM");
+	//	Instructor instructor=new Instructor("Eduardo", "Perez","Eperez@hotmail.com");
+	//	InstructorDetail instructorDetail=new InstructorDetail("https://www.youtube.com/channel/UCV0GXJgNg","GYM");
 
 
 		//asociate the objects
