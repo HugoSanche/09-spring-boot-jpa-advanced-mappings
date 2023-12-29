@@ -17,7 +17,7 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDao appDao){
 		return runner->{
-		//	createInstructor(appDao);
+			//createInstructor(appDao);
 			//findTheInstructor(appDao);
 			//deleteInstructor(appDao);
 
@@ -27,7 +27,7 @@ public class CruddemoApplication {
 	}
 
 	private void deleteInstructorDetail(AppDao appDao) {
-		int theId=1;
+		int theId=6;
 		System.out.println("Delete instructor detail "+theId);
 		 appDao.deleteInstructorDetailById(theId);
 		System.out.println("Finish");
@@ -64,7 +64,7 @@ public class CruddemoApplication {
 
 	private void createInstructor(AppDao appDao) {
 
-		Instructor instructor=new Instructor("Hugo", "Baltazar","hugoclaren@hotmail.com");
+		Instructor instructor=new Instructor("Veronica", "Perez","veritoP@hotmail.com");
 		InstructorDetail instructorDetail=new InstructorDetail("https://www.youtube.com/channel/UCV0GXJgNgjimkXJIGT-ZB1Q","Travel");
 
 	//	Instructor instructor=new Instructor("Eduardo", "Perez","Eperez@hotmail.com");
@@ -82,8 +82,6 @@ public class CruddemoApplication {
 		System.out.println("Saving instructor: "+instructor);
 		appDao.save(instructor);
 		System.out.println("Done!");
-
-
 
 
 	}

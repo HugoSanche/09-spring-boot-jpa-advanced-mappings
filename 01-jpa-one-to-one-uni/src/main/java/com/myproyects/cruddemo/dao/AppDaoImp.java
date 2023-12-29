@@ -51,7 +51,12 @@ public class AppDaoImp implements AppDao{
     public void deleteInstructorDetailById(int theId) {
         InstructorDetail tempInstructorDetail=entityManager.find(InstructorDetail.class,theId);
 
+
+        tempInstructorDetail.getInstructor().setInstructorDetail(null);
+
+        System.out.println("Instructor "+tempInstructorDetail.getInstructor() );
         System.out.println("Will be deleted instructor Detail "+tempInstructorDetail);
+
        try {
            entityManager.remove(tempInstructorDetail);
        }catch (Exception e)
@@ -60,3 +65,9 @@ public class AppDaoImp implements AppDao{
        }
     }
 }
+
+
+
+
+
+
