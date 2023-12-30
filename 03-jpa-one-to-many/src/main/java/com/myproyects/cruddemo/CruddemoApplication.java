@@ -1,6 +1,7 @@
 package com.myproyects.cruddemo;
 
 import com.myproyects.cruddemo.dao.AppDao;
+import com.myproyects.cruddemo.entity.Course;
 import com.myproyects.cruddemo.entity.Instructor;
 import com.myproyects.cruddemo.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -25,15 +26,38 @@ public class CruddemoApplication {
 			//deleteInstructorDetail(appDao);
 
 			createInstructorWithCourses(appDao);
+
+
+
+
+
 		};
 	}
 
 	private void createInstructorWithCourses(AppDao appDao) {
-		Instructor instructor=new Instructor("Veronica", "Perez","veritoP@hotmail.com");
-		InstructorDetail instructorDetail=new InstructorDetail("https://www.youtube.com/channel/UCV0GXJgNgjimkXJIGT-ZB1Q","Travel");
+		Instructor tempInstructor=new Instructor("Veronica", "Perez","veritoP@hotmail.com");
+		InstructorDetail tempInstructorDetail=new InstructorDetail("https://www.youtube.com/channel/UCV0GXJgNgjimTFGG","Gamer");
 
-		//asociate the objects
-		instructor.setInstructorDetail(instructorDetail);
+		//associate the objects
+		tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+		//create some courses
+		Course tempCourse1=new Course("Java Script - REACT ");
+		Course tempCourse2=new Course("Boot Camp - Design web developer");
+
+		// add courses to instructor
+		tempInstructor.add(tempCourse1);
+		tempInstructor.add(tempCourse2);
+
+		//save the instructor
+		//
+		//NOTE: this will ALSO save the courses
+		//because of CascadeType.PERSIS
+
+		System.out.println("Saving instructor: "+tempInstructor);
+		System.out.println("The courses "+tempInstructor.getCourses());
+		appDao.save(tempInstructor);
+
 	}
 
 	private void deleteInstructorDetail(AppDao appDao) {

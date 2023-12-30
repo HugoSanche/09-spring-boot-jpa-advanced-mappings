@@ -17,10 +17,8 @@ public class Course {
 
   public Course(){}
 
-    public Course(int id, String title, Instructor instructor) {
-        this.id = id;
+    public Course( String title) {
         this.title = title;
-        this.instructor = instructor;
     }
 
     public int getId() {
