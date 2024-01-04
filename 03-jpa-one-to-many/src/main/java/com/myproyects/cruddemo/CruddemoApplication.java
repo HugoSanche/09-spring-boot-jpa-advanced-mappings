@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -27,12 +29,54 @@ public class CruddemoApplication {
 
 			//createInstructorWithCourses(appDao);
 
-			findTheInstructorWithCourses(appDao);
+			//findTheInstructorWithCourses(appDao);
 
-
+			//findCoursesForInstructor(appDao);
+			findTheInstructorWithCoursesJoinFetch(appDao);
 
 		};
 	}
+
+	private void findTheInstructorWithCoursesJoinFetch(AppDao appDao) {
+		int theId=1;
+		System.out.println("Find the instructor id "+theId);
+
+		Instructor instructor=appDao.findInstructorByIdJoinFetch(theId);
+		System.out.println("The Instructor "+instructor);
+
+		System.out.println("The Instructor Courses "+instructor.getCourses());
+
+		System.out.println("!Done");
+	}
+
+	private void findCoursesForInstructor(AppDao appDao) {
+		int theId=1;
+		System.out.println("Find the Instructor "+theId);
+
+		Instructor tempInstructor=appDao.findInstructorById(theId);
+
+		System.out.println("The Instructor "+tempInstructor);
+
+		//find courses
+		List<Course> courses=appDao.findCoursesByInstructorId(theId);
+
+		tempInstructor.setCourses(courses);
+
+		System.out.println("The associates courses; "+tempInstructor.getCourses());
+
+		System.out.println("!Done");
+	}
+
+	private void setCourse(AppDao appDAO) {
+		int instructorId = 12;
+		Instructor instructor = appDAO.findInstructorById(instructorId);
+		Course course = new Course("test");
+		List<Course> courses = instructor.getCourses();
+		courses.add(course);
+		course.setInstructor(instructor);
+		appDAO.save(instructor);
+	}
+
 
 	private void findTheInstructorWithCourses(AppDao appDao) {
 		int theId=1;
