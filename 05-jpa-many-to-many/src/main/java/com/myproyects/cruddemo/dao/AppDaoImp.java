@@ -3,6 +3,7 @@ package com.myproyects.cruddemo.dao;
 import com.myproyects.cruddemo.entity.Course;
 import com.myproyects.cruddemo.entity.Instructor;
 import com.myproyects.cruddemo.entity.InstructorDetail;
+import com.myproyects.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
@@ -150,6 +151,41 @@ public class AppDaoImp implements AppDao {
         return course;
 
 
+    }
+
+    @Override
+    public Course findCourseAndStudentsByCourseId(int theId) {
+
+        TypedQuery<Course> query=entityManager.createQuery("select c from Course c "
+                                                    +"JOIN FETCH c.students "
+                                                    +"where c.id=:data ", Course.class
+        );
+       query.setParameter("data",theId);
+
+       Course tempCourse=query.getSingleResult();
+
+        return tempCourse;
+    }
+
+    @Override
+    public Student findStudentAndCoursesByStudentId(int theId) {
+
+        TypedQuery<Student> query=entityManager.createQuery("select s from Student s "
+                                +"JOIN FETCH s.courses "
+                                +"where s.id=:data ", Student.class
+        );
+        query.setParameter("data",theId);
+
+
+        Student student=query.getSingleResult();
+
+        return student;
+    }
+
+    @Transactional
+    @Override
+    public void update(Student tempStudent) {
+        entityManager.merge(tempStudent);
     }
 }
 
