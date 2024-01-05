@@ -26,6 +26,8 @@ public class Instructor {
 
     //OneToMany by default used fetch.LAZY, here I changed to EAGER to retrieve all data.
     //OneToMany = FetchType.LAZY is by default its bets practice. This retrieve only data you used
+
+
     @OneToMany(mappedBy = "instructor",fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
                     CascadeType.PERSIST,CascadeType.REFRESH})  //reference to class Course to field instructor //private Instructor instructor
