@@ -4,6 +4,7 @@ import com.myproyects.cruddemo.dao.AppDao;
 import com.myproyects.cruddemo.entity.Course;
 import com.myproyects.cruddemo.entity.Instructor;
 import com.myproyects.cruddemo.entity.InstructorDetail;
+import com.myproyects.cruddemo.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,9 +21,47 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDao appDao){
 		return runner->{
-
+			//createCourseAndReviews(appDao);
+			//retrieveCorseAndReviews(appDao);
+			deleteCourseAndReviews(appDao);
 
 		};
+	}
+
+	private void deleteCourseAndReviews(AppDao appDao) {
+		int theId=10;
+
+		System.out.println("Deleting course id: "+ theId);
+
+		appDao.deleteCourseByID(theId);
+		System.out.println("!Done");
+
+	}
+
+	private void retrieveCorseAndReviews(AppDao appDao) {
+
+		int theId=10;
+
+		//get the course and reviews
+		Course tempCourse=appDao.findCourseAndReviewsByCourseId(theId);
+
+		System.out.println("The Course "+tempCourse);
+		System.out.println("The reviews "+tempCourse.getReviews());
+	}
+
+	private void createCourseAndReviews(AppDao appDao) {
+
+		//Create a Course
+		Course tempCourse=new Course("Project Development Using Spring Boot");
+
+		tempCourse.addReview(new Review("Amazing course"));
+		tempCourse.addReview(new Review("Thanks a lot. I've learn lots from this course"));
+		tempCourse.addReview(new Review("very nice , real time and informative content"));
+
+		//Saving the course
+		System.out.println("The Course "+tempCourse);
+		System.out.println("The reviews "+tempCourse.getReviews());
+		appDao.saveCourse(tempCourse);
 	}
 
 	private void deleteCourse(AppDao appDao) {

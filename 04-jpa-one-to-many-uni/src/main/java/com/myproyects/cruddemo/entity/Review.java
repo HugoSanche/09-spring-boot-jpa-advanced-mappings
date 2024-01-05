@@ -14,9 +14,6 @@ public class Review {
     private String comment;
 
 
-    @OneToMany(cascade={CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE})
-    @JoinColumn(name="course_id")
-   private  Course course;
     Review(){
 
     }
@@ -46,7 +43,7 @@ public class Review {
         return "Review{" +
                 "id=" + id +
                 ", comment='" + comment + '\'' +
-                ", course=" + course +
+
                 '}';
     }
 }
