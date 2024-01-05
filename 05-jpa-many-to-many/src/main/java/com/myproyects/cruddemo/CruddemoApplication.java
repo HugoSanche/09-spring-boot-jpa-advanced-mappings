@@ -20,8 +20,41 @@ public class CruddemoApplication {
 		return runner->{
 			//createCourseAndStudents(appDao);
 			//findCourseAndStudents(appDao);
-			findStudentAndCourses(appDao);
+			//findStudentAndCourses(appDao);
+			//addMoreCoursesForStudent(appDao);
+			//deleteCourse(appDao);
+			deleteStudent(appDao);
+
 		};
+	}
+
+	private void deleteStudent(AppDao appDao) {
+		int theId=2;
+
+		System.out.println("Deleting Student id "+theId);
+
+		appDao.deleteStudentById(theId);
+		System.out.println("Done!");
+	}
+
+	private void addMoreCoursesForStudent(AppDao appDao) {
+		int theId=2;
+		Student student=appDao.findStudentAndCoursesByStudentId(theId);
+
+		//Create courses
+		Course course=new Course("Java Design Patterns");
+		Course course2=new Course("Tomcat for admins");
+
+		//add courses to student
+		student.addCourses(course2);
+		student.addCourses(course);
+
+		System.out.println("Updating Student "+student);
+		System.out.println("Associated courses "+student.getCourses());
+
+		appDao.updateStudent(student);
+
+		System.out.println("!Done");
 	}
 
 	private void findStudentAndCourses(AppDao appDao) {
@@ -48,9 +81,9 @@ public class CruddemoApplication {
 	}
 
 	private void createCourseAndStudents(AppDao appDao) {
-		Course newCourse=new Course("Java Concurrency");
+		Course newCourse=new Course("COBOL");
 
-		Student newStudent=new Student("Hugo","Baltazar","hboss198@yahoo.com");
+		Student newStudent=new Student("Diana","Garcia","d.garcia@yahoo.com");
 
 		newCourse.addStudent(newStudent);
 		//newStudent.addCourses(newCourse);
@@ -95,7 +128,7 @@ public class CruddemoApplication {
 	}
 
 	private void deleteCourse(AppDao appDao) {
-		int theId=10;
+		int theId=11;
 
 		System.out.println("Deleting the course by Id "+theId);
 		appDao.deleteCourseByID(theId);
